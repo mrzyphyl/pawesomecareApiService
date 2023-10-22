@@ -52,11 +52,10 @@ module.exports.updateBooleanFields = async (AppointmentID, updatedFields) => {
     return affectedRows
 }
 
-module.exports.updatePendingStatus = async (AppointmentID, update) => {
-    const { isPending = false } = update
+module.exports.updatePendingStatus = async (AppointmentID, isPending) => {
     const [[[ { affectedRows } ]]] = await db.query(
         'CALL usp_book_appts_update_pending_status(?, ?)', 
         [AppointmentID, isPending]
     )
-    return affectedRows
+    return affectedRows;
 }
