@@ -6,7 +6,8 @@ const {
     editAppointments,
     getAnAppointment,
     getAppointmentsTicket,
-    updateBooleanFields
+    updateBooleanFields,
+    updatePendingStatus
 } = require('../controller/appointmentController')
 const router = express.Router()
 
@@ -17,5 +18,7 @@ router.route('/:id').delete(deleteAppointments).put(editAppointments).get(getAnA
 router.route('/tickets/:id').get(getAppointmentsTicket)
 
 router.route('/update-bool/:id').put(updateBooleanFields)
+
+router.route('/accept/:id').put(updatePendingStatus)
 
 module.exports = router

@@ -70,6 +70,20 @@ const updateBooleanFields = asyncHandler(async (req, res) => {
     }
 })
 
+// Update Pending Status
+//@access Public
+const updatePendingStatus = asyncHandler(async (req, res) => {
+    const { id } = req.params
+    const isPending = req.body.isPending
+    const affectedRows = await service.updatePendingStatus(id, isPending)
+
+    if (affectedRows === 0) {
+        res.status(404).json(`No record with given id: ${id}`)
+    } else {
+        res.send('Pending status updated successfully.')
+    }
+})
+
 
 module.exports = {
     getAppointments,
@@ -78,5 +92,6 @@ module.exports = {
     deleteAppointments,
     addAppointments,
     editAppointments,
-    updateBooleanFields
+    updateBooleanFields,
+    updatePendingStatus
 }
